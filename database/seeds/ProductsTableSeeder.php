@@ -18,7 +18,7 @@ class ProductsTableSeeder extends Seeder
         $faker = Factory::create();
         $categories = Category::All();
         foreach($categories as $category){
-            for($i = 0; $i <= 5; $i++){
+            for($i = 0; $i <= 40; $i++){
                 $product = Product::create([
                     'name' => $category->name . ' ' .$i,
                     'description' =>$faker->paragraph(),

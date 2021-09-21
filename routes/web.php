@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('project.index');
+
+
 
 Auth::routes();
+Route::any('/home', 'HomeController@index')->name('project.index');
+Route::any('/home/list', 'HomeController@list')->name('project.list');
+Route::get('/home/create','HomeController@create')->name('project.create');
+Route::post('/home/create','HomeController@store')->name('project.store');
+Route::get('/home/{id}/edit','HomeController@edit')->name('project.edit');
+Route::patch('/home/{id}/edit','HomeController@update')->name('project.update');
+Route::delete('/home/{id}','HomeController@destroy')->name('project.destroy');
 
-Route::get('/home', 'HomeController@index')->name('home');
