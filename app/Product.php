@@ -10,6 +10,7 @@ class Product extends Model
     use SearchableTrait;
 
     protected $guarded = [];
+
     protected $searchable = [
         'columns' => [
             'products.name'              =>10,

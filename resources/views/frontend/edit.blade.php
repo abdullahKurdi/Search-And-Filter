@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    <h3 class="text-center">Edit Item -{{$product->name}}-</h3>
     <div class="row">
         <div class="col-12">
             <form action="{{route('project.edit',$product->id)}}" method="post">
@@ -31,7 +32,7 @@
                     @foreach($categories as $category)
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="radio" name="category_id" class="form-check-input" vlaue="{{$category->id}}" {{old('category_id',$product->category->id) == $category->id ? 'checked' : ''}}>{{$category->name}}
+                                <input type="radio" name="category_id" class="form-check-input" value="{{$category->id}}" {{old('category_id',$product->category->id) == $category->id ? 'checked' : ''}}>{{$category->name}}
                             </label>
                         </div>
                     @endforeach
@@ -44,7 +45,7 @@
                     @foreach($tags as $tag)
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="checkbox" name="tags[]" class="form-check-input" vlaue="{{$tag->id}}" {{is_array(old('tags',$product->tags->pluck('id')->toArray())) && in_array($tag->id,old('tags',$product->tags->pluck('id')->toArray()))?'checked':''}}>{{$tag->name}}
+                                <input type="checkbox" name="tags[]" class="form-check-input" value="{{$tag->id}}" {{is_array(old('tags',$product->tags->pluck('id')->toArray())) && in_array($tag->id,old('tags',$product->tags->pluck('id')->toArray()))?'checked':''}}>{{$tag->name}}
                             </label>
                         </div>
                     @endforeach
@@ -60,7 +61,7 @@
                     @enderror
                 </div>
                 <div class="form-group pb-1">
-                    <button type="submit" name="save" class="btn btn-primary btn-block">Save</button>
+                    <button type="submit" name="save" class="btn btn-primary btn-block">Update</button>
                 </div>
             </form>
         </div>

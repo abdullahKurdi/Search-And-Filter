@@ -16,7 +16,9 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
+
         $categories = Category::All();
+
         foreach($categories as $category){
             for($i = 0; $i <= 40; $i++){
                 $product = Product::create([

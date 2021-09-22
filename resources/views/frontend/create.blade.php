@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    <h3 class="text-center">Create New Item</h3>
     <div class="row">
         <div class="col-12">
             <form action="{{route('project.create')}}" method="post">
@@ -30,7 +31,7 @@
                     @foreach($categories as $category)
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="radio" name="category_id" class="form-check-input" vlaue="{{$category->id}}" {{old('category_id') == $category->id ? 'checked' : ''}}>{{$category->name}}
+                            <input type="radio" name="category_id" class="form-check-input" value="{{$category->id}}" {{old('category_id') == $category->id ? 'checked' : ''}}>{{$category->name}}
                         </label>
                     </div>
                     @endforeach
@@ -43,7 +44,7 @@
                     @foreach($tags as $tag)
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="checkbox" name="tags[]" class="form-check-input" vlaue="{{$tag->id}}" {{is_array(old('tags')) && in_array($tag->id,old('tags'))?'checked':''}}>{{$tag->name}}
+                                <input type="checkbox" name="tags[]" class="form-check-input" value="{{$tag->id}}" {{is_array(old('tags')) && in_array($tag->id,old('tags'))?'checked':''}}>{{$tag->name}}
                             </label>
                         </div>
                     @endforeach

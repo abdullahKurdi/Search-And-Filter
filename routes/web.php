@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::get('/', 'HomeController@index')->name('project.index');
+Route::get('/home', 'HomeController@index')->name('project.index');
 
 Auth::routes();
 Route::any('/project', 'HomeController@index')->name('project.index');

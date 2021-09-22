@@ -61,6 +61,7 @@
             </form>
         </div>
         <div class="col-9">
+            <h3 class="text-center mb-4">List of Items</h3>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>

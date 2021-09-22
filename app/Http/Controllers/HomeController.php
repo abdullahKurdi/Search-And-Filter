@@ -6,6 +6,7 @@ use App\Category;
 use App\Product;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -119,7 +120,32 @@ class HomeController extends Controller
     }
 
     public function store(Request $request){
+        $validator = Validator::make($request->all(),[
+            'name'          => 'required',
+            'description'   =>'required',
+            'price'         =>'required|numeric',
+            'category_id'   =>'required',
+            'tags'          =>'required',
+            'image'         =>'required'
+        ]);
+        //var_dump($request->all());
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $product = Product::create([
+            'name'          =>$request->name,
+            'description'   =>$request->description,
+            'price'         =>$request->price,
+            'category_id'   =>$request->category_id,
+            'image'         =>$request->image,
+        ]);
 
+        $product->tags()->attach($request->tags);
+
+        return redirect()->route('project.create')->with([
+            'message'=>'Product Added Successfully',
+            'alert-type'=>'success'
+        ]);
     }
 
     public function edit($id){
@@ -131,10 +157,43 @@ class HomeController extends Controller
     }
 
     public function update(Request $request , $id){
+        $validator = Validator::make($request->all(),[
+            'name'          => 'required',
+            'description'   =>'required',
+            'price'         =>'required|numeric',
+            'category_id'   =>'required',
+            'tags'          =>'required',
+            'image'         =>'required'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
+        $product = Product::whereId($id)->first();
+
+        $data['name']           =$request->name;
+        $data['description']    =$request->description;
+        $data['price']          =$request->price;
+        $data['category_id']    =$request->category_id;
+        $data['image']          =$request->image;
+
+        $product->update($data);
+        $product->tags()->sync($request->tags);
+
+        return redirect()->route('project.list')->with([
+            'message'=>'Product Updated Successfully',
+            'alert-type'=>'success'
+        ]);
     }
 
     public function destroy($id){
-
+        $product = Product::whereId($id)->first();
+        if($product){
+            $product->delete();
+            return redirect()->route('project.list')->with([
+                'message'=>'Product Deleted Successfully',
+                'alert-type'=>'success'
+            ]);
+        }
     }
 }
