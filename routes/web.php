@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', 'HomeController@index')->name('project.index');
 
-
-
 Auth::routes();
-Route::any('/home', 'HomeController@index')->name('project.index');
-Route::any('/home/list', 'HomeController@list')->name('project.list');
-Route::get('/home/create','HomeController@create')->name('project.create');
-Route::post('/home/create','HomeController@store')->name('project.store');
-Route::get('/home/{id}/edit','HomeController@edit')->name('project.edit');
-Route::patch('/home/{id}/edit','HomeController@update')->name('project.update');
-Route::delete('/home/{id}','HomeController@destroy')->name('project.destroy');
+Route::any('/project', 'HomeController@index')->name('project.index');
+Route::any('/project/list', 'HomeController@list')->name('project.list');
+Route::get('/project/create','HomeController@create')->name('project.create');
+Route::post('/project/create','HomeController@store')->name('project.store');
+Route::get('/project/{id}/edit','HomeController@edit')->name('project.edit');
+Route::patch('/project/{id}/edit','HomeController@update')->name('project.update');
+Route::delete('/project/{id}','HomeController@destroy')->name('project.destroy');
 

@@ -56,7 +56,7 @@
                     <button type="submit" class="btn btn-primary btn-block">Search</button>
                 </div>
                 <div class="form-group pb-3">
-                    <a href="{{route('project.index')}}" class="btn btn-danger btn-block">Rest</a>
+                    <a href="{{route('project.index')}}" class="btn btn-danger btn-block">Reset</a>
                 </div>
             </form>
         </div>

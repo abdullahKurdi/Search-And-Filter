@@ -9,21 +9,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index(Request $request){
 
         $keyword = $request->has('keyword') ? $request->get('keyword'):null;
@@ -126,9 +117,11 @@ class HomeController extends Controller
         $tags = Tag::all();
         return view('frontend.create',compact('categories','tags'));
     }
+
     public function store(Request $request){
 
     }
+
     public function edit($id){
 
         $categories = Category::all();
@@ -136,9 +129,11 @@ class HomeController extends Controller
         $product =Product::whereId($id)->first();
         return view('frontend.edit',compact('categories','tags','product'));
     }
+
     public function update(Request $request , $id){
 
     }
+
     public function destroy($id){
 
     }

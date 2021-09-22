@@ -56,12 +56,54 @@
                     <button type="submit" class="btn btn-primary btn-block">Search</button>
                 </div>
                 <div class="form-group pb-3">
-                    <a href="{{route('project.list')}}" class="btn btn-danger btn-block">Rest</a>
+                    <a href="{{route('project.list')}}" class="btn btn-danger btn-block">Reset</a>
                 </div>
             </form>
         </div>
         <div class="col-9">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Tags</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($products as $product)
+                    <tr>
+                        <td>{{$product->id}}</td>
+                        <td>{{$product->name}}</td>
+                        <td>{{$product->category->name}}</td>
+                        <td>
+                        @foreach($product->tags as $tag)
+                            <span class="badge badge-info">{{$tag->name}}</span>
+                        @endforeach
+                        </td>
 
+                        <td>{{$product->price}}</td>
+                        <td>
+                            <a href="{{route('project.edit',$product->id)}}" class="btn btn-success btn-sm">Edit</a>
+                            {{--<form action="{{route('project.destroy',$product->id)}}" method="post" class="d-inline">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" onclick="confirm('are you sure');" class="btn btn-danger btn-sm">Delete</button>
+                            </form>--}}
+                            <a href="javascript:void(0)" onclick="if(confirm('Are you sure?')){document.getElementById('delete-{{$product->id}}').submit();}else {return false;}" class="btn btn-danger btn-sm">Delete</a>
+                            <form action="{{route('project.destroy',$product->id)}}" method="post" style="display: none" id="delete-{{$product->id}}">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
             <div class="d-flex justify-content-center">
                 {{$products->appends(request()->input())->links()}}
             </div>
